@@ -12,37 +12,37 @@ using namespace std;
 class Pelicula : public Video{
 
   private:
-    int calificacion;
+    string calificacion;
 
   public:
     //Constructores
     Pelicula();
-    Pelicula(int, string, int, string, int);
+    Pelicula(string, string, string, string, string);
     //Gets
-    void setCalificacion(int);
-    
-    int getCalificacion(){return calificacion;};
+    void setCalificacion(string);
+
+    string getCalificacion(){return calificacion;};
     //Funciones
     void mostrarDatos();
 };
 
 //Constructores
 Pelicula::Pelicula() : Video(){
-  calificacion = 0;
+  calificacion = "";
 }
 
-Pelicula::Pelicula(int _ID, string nom, int _duracion, string gen, int calif) : Video (_ID, nom, _duracion, gen){
+Pelicula::Pelicula(string _ID, string nom, string _duracion, string gen, string calif) : Video (_ID, nom, _duracion, gen){
   calificacion = calif;
 }
 
 
 //Sets
-void Pelicula::setCalificacion(int _calificacion){
+void Pelicula::setCalificacion(string _calificacion){
   calificacion = _calificacion;
 }
 
 //Funciones
 void Pelicula::mostrarDatos(){
-  Video::mostrarDatos();
-  cout << calificacion << endl;
+    Video::mostrarDatos();
+    cout << calificacion << endl;
 }

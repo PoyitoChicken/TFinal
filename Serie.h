@@ -12,19 +12,17 @@ using namespace std;
 class Serie : public Video{
 
   private:
-    string tituloEp;
-    int numTemp;
-    int calificacion;
+    string tituloEp, numTemp, calificacion;
 
   public:
     //Constructores
     Serie();
-    Serie(int, string, int, string, string, int, int);
-    void setCalificacion(int);
+    Serie(string, string, string, string, string, string, string);
+    void setCalificacion(string);
     //Gets
     string getTituloEp(){return tituloEp;};
-    int getNumTemp(){return numTemp;};
-    int getCalificacion(){return calificacion;};
+    string getNumTemp(){return numTemp;};
+    string getCalificacion(){return calificacion;};
     //Funciones
     void mostrarDatos();
 };
@@ -33,21 +31,21 @@ class Serie : public Video{
 //Constructores
 Serie::Serie() : Video(){
   tituloEp = "Titulo-Episodio";
-  numTemp = 0;
-  calificacion = 0;
+  numTemp = "";
+  calificacion = "";
 }
 
-Serie::Serie(int _ID, string nom, int _duracion, string gen, string _tituloEp, int _numTemp, int calif) : Video(_ID, nom, _duracion, gen){
+Serie::Serie(string _ID, string nom, string _duracion, string gen, string _tituloEp, string _numTemp, string calif) : Video(_ID, nom, _duracion, gen){
   tituloEp = _tituloEp;
   numTemp = _numTemp;
   calificacion = calif;
 };
-void Serie::setCalificacion(int _calificacion){
+void Serie::setCalificacion(string _calificacion){
   calificacion = _calificacion;
 }
 
 //Funciones
 void Serie::mostrarDatos(){
-  Video::mostrarDatos();
-  cout << tituloEp << " " << numTemp << " " << calificacion << endl;
+    Video::mostrarDatos();
+    cout << tituloEp << " " << numTemp << " " << calificacion << endl;
 }

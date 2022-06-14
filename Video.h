@@ -8,27 +8,23 @@ using namespace std;
 class Video{
 
   protected:
-    int ID;
-    string nombre;
-    int duracion;
-    string genero;
-    int calificacion;
+    string ID, nombre, duracion, genero, calificacion;
 
   public:
     //Constructores
     Video();
-    Video(int, string, int, string);
-    virtual void setCalificacion(int);
+    Video(string, string, string, string);
+    virtual void setCalificacion(string);
     //Gets
-    int getID(){return ID;};
+    string getID(){return ID;};
     string getNombre(){return nombre;};
-    int getDuracion(){return duracion;};
+    string getDuracion(){return duracion;};
     string getGenero(){return genero;};
     //Funciones
     virtual void mostrarDatos();
     virtual string getTituloEp(){return "";};
-    virtual int getNumTemp(){return 0;};
-    virtual int getCalificacion(){return 0;};
+    virtual string getNumTemp(){return 0;};
+    virtual string getCalificacion(){return 0;};
 };
 /*
       string getTituloEp(){return tituloEp;};
@@ -37,20 +33,20 @@ class Video{
 */
 //Constructores
 Video::Video(){
-  ID = 0;
+  ID = "";
   nombre = "Video";
-  duracion = 0;
+  duracion = "";
   genero = "Sin Genero";
 }
 
-Video::Video(int _ID, string nom, int _duracion, string gen){
+Video::Video(string _ID, string nom, string _duracion, string gen){
   ID = _ID;
   nombre = nom;
   duracion = _duracion;
   genero = gen;
 }
 
-void Video::setCalificacion(int _calificacion){
+void Video::setCalificacion(string _calificacion){
   calificacion = _calificacion;
 }
 //Funciones

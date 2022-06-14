@@ -9,53 +9,52 @@ Oscar Cortés A00825972
 #include <fstream>
 #include <stdlib.h>
 #include <string>
-#include <chrono>
-#include <thread>
+
 
 using namespace std;
 
-string ID, nombre, duracion, genero, tituloEp, numTemp, calificacion;
-string nlinea;
-int linea = 0;
-int posicion = 0;
-
 
 int main(){
+    string ID, nombre, duracion, genero, tituloEp, numTemp, calificacion;
     ifstream Datos;
     Datos.open("Datos.txt");
     Datos >> ID;
-    int Id = stoi(ID);
+    int Id = 1;
     Datos.clear();
     Datos.seekg(0, ios::beg);
-    int i = 0;
-    Video *videos[15];
+    int j = -1;
+    Video *videos[16];
+    goto Peli;
     if (Id % 2 == 0){
-            i++;
-            Serie:Datos>> ID >> nombre >> duracion >> genero >> tituloEp >> numTemp >> calificacion;
-            videos[i] = new Serie(stoi(ID), nombre, stoi(duracion), genero, tituloEp, stoi(numTemp), stoi(calificacion));
-            if (i >= 15){
+            Serie:j++;
+            Datos>> ID >> nombre >> duracion >> genero >> tituloEp >> numTemp >> calificacion;
+            videos[j] = new Serie(ID, nombre, duracion, genero, tituloEp, numTemp, calificacion);
+
+            if (j >= 15){
                 goto Continuar;
             }
             goto Peli;
         }
         else if (Id % 2 != 0){
-            i++;
-            Peli:Datos>> ID >> nombre >> duracion >> genero >> calificacion;
-            videos[i] = new Pelicula(stoi(ID), nombre, stoi(duracion), genero, stoi(calificacion));
-            if (i >= 15){
+            Peli:j++;
+            Datos>> ID >> nombre >> duracion >> genero >> calificacion;
+            videos[j] = new Pelicula(ID, nombre, duracion, genero, calificacion);
+
+            if (j >= 15){
                 goto Continuar;
             }
             goto Serie;
         }
-    
+
     Continuar:
-    cout << "1. Cargar archivo de datos" << endl;
-    cout << "2. Mostrar los videos en general con una cierta calificación o de un cierto género" << endl;
-    cout << "3. Mostrar los episodios de una determinada serie con una calificacion determinada" << endl;
-    cout << "4. Mostrar las películas con cierta calificacion" << endl;
-    cout << "5. Calificar un video" << endl;
-    cout << "0. Salir" << endl;
     while (true){
+        Interfaz:
+        cout << "1. Cargar archivo de datos" << endl;
+        cout << "2. Mostrar los videos en general con una cierta calificación o de un cierto género" << endl;
+        cout << "3. Mostrar los episodios de una determinada serie con una calificacion determinada" << endl;
+        cout << "4. Mostrar las películas con cierta calificacion" << endl;
+        cout << "5. Calificar un video" << endl;
+        cout << "0. Salir" << endl;
         int decision;
         cout << "Ingrese una opción: ";
         cin >> decision;
@@ -64,6 +63,8 @@ int main(){
                 for (int i = 0; i<=15; i++){
                     videos[i] -> mostrarDatos();
                 }
+                cout << "\n\n\n";
+                goto Interfaz;
                 break;
             case 2:
             {
@@ -71,8 +72,9 @@ int main(){
                 char opcion;
                 cin >> opcion;
                 if (opcion == 'c'){
-                    int c;
+                    string c;
                     cout << "Ingrese la calificacion: ";
+                    cin >> c;
                     for (int i = 0; i<=15; i++){
                         if (videos[i] != NULL){
                             if (videos[i] -> getCalificacion() == c){
@@ -94,7 +96,6 @@ int main(){
                             }
                         }
                     }
-
                 else if (genero == "m"){
                     for (int i = 0; i<=15; i++){
                         if (videos[i] != NULL){
@@ -113,27 +114,37 @@ int main(){
                         }
                     }
                 }
- 
+
+            }
+                cout << "\n\n\n";
+                goto Interfaz;
                 break;
             }
             case 3:
             {
                 cout << "Ingrese el titulo de la serie: ";
+                string punt;
                 string titulo;
                 cin >> titulo;
+                cout << "Ingrese la puntuacion del capitulo:";
+                cin >> punt;
                 for (int i = 0; i<=15; i++){
                     if (videos[i] != NULL){
-                        if (videos[i] -> getTituloEp() == titulo){
-                            videos[i] -> mostrarDatos();
+                        if (videos[i] ->getNombre() == titulo){
+                                if (videos[i] -> getCalificacion() == punt){
+                                    videos[i] -> mostrarDatos();
+                                }
                         }
                     }
                 }
+                cout << "\n\n\n";
+                goto Interfaz;
                 break;
             }
             case 4:
             {
                 cout << "Ingrese la calificacion: ";
-                int calificacion;
+                string calificacion;
                 cin >> calificacion;
                 for (int i = 0; i<=15; i++){
                     if (videos[i] != NULL){
@@ -142,23 +153,32 @@ int main(){
                             }
                         }
                     }
+                cout << "\n\n\n";
+                goto Interfaz;
                 break;
             }
             case 5:
             {
                 cout << "Ingrese el ID del video: ";
-                int id;
+                string id;
                 cin >> id;
                 cout << "Ingresa la calificacion del video: ";
-                int cal;
+                string cal;
                 cin >> cal;
                 for (int i = 0; i<=15; i++){
                     if (videos[i] != NULL){
                         if (videos[i] -> getID() == id){
+                            cout << "\nAntes: ";
+                            videos[i] -> mostrarDatos();
+                            cout <<"\n";
                             videos[i] -> setCalificacion(cal);
+                            cout << "Despues: ";
+                            videos[i] -> mostrarDatos();
+                            cout <<"\n";
                         }
                     }
                 }
+                goto Interfaz;
                 break;
             }
             case 0:
@@ -166,15 +186,15 @@ int main(){
                 Datos.close();
                 cout << "Gracias por usar el programa" << endl;
                 exit(0);
-                break;             
+                break;
             default:
             {
                 cout << "Ingrese una opcion valida" << endl;
+                goto Interfaz;
                 break;
             }
         }
         }
         return 0;
-    }
     }
 }
