@@ -9,7 +9,8 @@ Oscar Cortés A00825972
 #include <fstream>
 #include <stdlib.h>
 #include <string>
-
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -41,8 +42,6 @@ int main(){
             i++;
             Peli:Datos>> ID >> nombre >> duracion >> genero >> calificacion;
             videos[i] = new Pelicula(stoi(ID), nombre, stoi(duracion), genero, stoi(calificacion));
-
-
             if (i >= 15){
                 goto Continuar;
             }
@@ -69,52 +68,52 @@ int main(){
             case 2:
             {
                 cout << "Quiere filtrar por calificacion (c) o por genero(g): ";
-        char opcion;
-        cin >> opcion;
-        if (opcion == 'c'){
-            int c;
-            cout << "Ingrese la calificacion: ";
-            for (int i = 0; i<=15; i++){
-                if (videos[i] != NULL){
-                    if (videos[i] -> getCalificacion() == c){
-                        videos[i] -> mostrarDatos();
-                    }
-                }
-            }
-        }
-        else if (opcion == 'g'){
-            cout << "Ingrese el genero drama(d), misterio(m) y accion(a): ";
-            string genero;
-            cin >> genero;
-            if (genero == "d"){
-                for (int i = 0; i<=15; i++){
-                    if (videos[i] != NULL){
-                        if (videos[i] -> getGenero() == "Drama"){
-                            videos[i] -> mostrarDatos();
+                char opcion;
+                cin >> opcion;
+                if (opcion == 'c'){
+                    int c;
+                    cout << "Ingrese la calificacion: ";
+                    for (int i = 0; i<=15; i++){
+                        if (videos[i] != NULL){
+                            if (videos[i] -> getCalificacion() == c){
+                                videos[i] -> mostrarDatos();
+                            }
                         }
                     }
                 }
-            }
-            else if (genero == "m"){
-                for (int i = 0; i<=15; i++){
-                    if (videos[i] != NULL){
-                        if (videos[i] -> getGenero() == "Misterio"){
-                            videos[i] -> mostrarDatos();
+                else if (opcion == 'g'){
+                    cout << "Ingrese el genero drama(d), misterio(m) y accion(a): ";
+                    string genero;
+                    cin >> genero;
+                    if (genero == "d"){
+                        for (int i = 0; i<=15; i++){
+                            if (videos[i] != NULL){
+                                if (videos[i] -> getGenero() == "Drama"){
+                                    videos[i] -> mostrarDatos();
+                                }
+                            }
                         }
                     }
-                }
-            }
-            else if (genero == "a"){
-                for (int i = 0; i<=15; i++){
-                    if (videos[i] != NULL){
-                        if (videos[i] -> getGenero() == "Accion"){
-                            videos[i] -> mostrarDatos();
-                        }
-                    }
-                }
-            }
 
-        }  
+                else if (genero == "m"){
+                    for (int i = 0; i<=15; i++){
+                        if (videos[i] != NULL){
+                            if (videos[i] -> getGenero() == "Misterio"){
+                                videos[i] -> mostrarDatos();
+                            }
+                        }
+                    }
+                }
+                else if (genero == "a"){
+                    for (int i = 0; i<=15; i++){
+                        if (videos[i] != NULL){
+                            if (videos[i] -> getGenero() == "Accion"){
+                                videos[i] -> mostrarDatos();
+                            }
+                        }
+                    }
+                }
+ 
                 break;
             }
             case 3:
@@ -176,5 +175,6 @@ int main(){
         }
         }
         return 0;
+    }
     }
 }
