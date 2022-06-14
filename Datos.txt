@@ -1,0 +1,15 @@
+1 Whiplash 106 Drama 5
+2 Stranger_Things 76 Misterio The_Dive 4 5
+3 Shuter_Island 138 Misterio 5
+4 Stranger_Things 45 Misterio The_Lost_Sister 2 3
+5 Morbius 108 Acción 10
+6 Breaking_Bad 47 Drama Ozymandias 5 5
+7 Come_and_See 142 Drama 9
+8 Breaking_Bad 47 Drama Fly 3 3
+9 Prisoners 153 Drama 4
+10 Berserk 22 Accion The_Eclipse 1 5
+11 Amores_Perros 154 Drama 4
+12 Arcane 44 Drama The_Base_Violence_Necessary_for_Change 1 5
+13 Everything_Everywhere_All_at_Once 140 Misterio 5
+14 Better_Call_Saul 50 Drama Plan_and_Execution 6 5
+15 The_Thing 109 Drama 5
